@@ -25,7 +25,7 @@ INCLUDEDIR=../tools/arageli/src/
 LIBDIR=../tools/arageli/lib/
 
 ../bin/skeleton: skeleton.cpp
-	$(CXX) $(CXXFLAGS) -I$(INCLUDEDIR) $^ -L$(LIBDIR) -larageli -o $@ 
+	$(CXX) $(CXXFLAGS) -I$(INCLUDEDIR) $^ -L$(LIBDIR) -larageli -o $@
 
 clean:
 	rm -f ../bin/skeleton
