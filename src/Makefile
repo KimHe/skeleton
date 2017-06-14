@@ -19,7 +19,7 @@
 #
 ##############################################################################
 ifndef CXXFLAGS
-	CXXFLAGS=-O2
+	CXXFLAGS=-O2 -fPIC
 endif
 INCLUDEDIR=../tools/arageli/src/
 LIBDIR=../tools/arageli/lib/

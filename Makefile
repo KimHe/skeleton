@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-.PHONY: skeleton runexamples check clean
+.PHONY: skeleton runexamples check install clean
 
 skeleton: arageli
 	$(MAKE) -C src
@@ -37,6 +37,9 @@ check: runexamples
 			else echo $$name - not passed; \
 		fi; \
 	done
+
+install: 
+	sudo mv bin/skeleton /usr/local/bin/
 
 clean:
 	$(MAKE) -C tools/arageli clean
