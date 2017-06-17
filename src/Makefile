@@ -29,3 +29,4 @@ LIBDIR=../tools/arageli/lib/
 
 clean:
 	rm -f ../bin/skeleton
+	rm -rf ../mex/skeletonmx.mex*

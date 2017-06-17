@@ -19,16 +19,26 @@
 #
 ##############################################################################
 
-.PHONY: skeleton runexamples check install clean
+
+
+all: skeleton arageli install skeletonmex
+
+.PHONY: check runexamples clean
+
+
+
+DIR = $(shell pwd)
+
+MATDIR = $(shell which matlab)
+ifeq (, MATDIR)
+	echo "MATLAB has not been installed, skeketon mex will not compiled"
+endif
 
 skeleton: arageli
 	$(MAKE) -C src
 
 arageli:
 	$(MAKE) -C tools/arageli arageli
-
-runexamples: skeleton
-	cd examples && $(SHELL) runexamples.sh
 
 check: runexamples
 	for name in $(notdir $(wildcard $(addsuffix /*.out, examples/golden.out))); do \
@@ -38,8 +48,17 @@ check: runexamples
 		fi; \
 	done
 
+runexamples: skeleton
+	cd examples && $(SHELL) runexamples.sh
+
+skeletonmex:
+	matlab -nodesktop -nosplash -r "mex -I$(DIR)/src/ -I$(DIR)/tools/arageli/src $(DIR)/mex/skeletonmx.cpp $(DIR)/tools/arageli/lib/*.a; quit"
+	mv skeletonmx.mex* mex/
+	echo "The mex for skeleton has been successfully compiled,"
+	echo " which is located in $(DIR)/mex"
+
 install: 
-	sudo mv bin/skeleton /usr/local/bin/
+	mv bin/skeleton /usr/local/bin/
 
 clean:
 	$(MAKE) -C tools/arageli clean
